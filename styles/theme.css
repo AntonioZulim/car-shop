@@ -1,0 +1,56 @@
+:root {
+    --background-color: #ECFEE8;
+    --primary-color: #7fafc7/*6EA4BF*/;
+    --nav-color: #C2EFEB;
+    --hover-color: #2D3047;
+}
+
+@font-face {
+    font-family: Quicksand;
+    src: url(../fonts/Quicksand/Quicksand-VariableFont_wght.ttf);
+}
+
+body {
+    font-family: Quicksand;
+    background-color: var(--background-color);
+}
+
+header, #logo{
+    background-color: var(--primary-color);
+}
+.button:hover {
+    background-color: var(--hover-color);
+}
+.button>*:hover{
+    filter: invert(1);
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+#homeSection>div {
+    color: white;
+    font-size: 4vw ;
+    font-weight: bolder;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    backdrop-filter: grayscale(90%) blur(1px);
+}
+
+nav{
+    background-color: var(--nav-color);
+}
+nav ul {
+    text-wrap-style: wrap;
+    text-align: center;
+}
+nav li:hover {
+    background-color: var(--hover-color);
+    color: white;
+    cursor: pointer;
+}
+
+footer {
+    background-color: var(--primary-color);
+}

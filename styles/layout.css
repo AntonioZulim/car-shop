@@ -21,11 +21,16 @@ img {
 
 #logo {
     grid-area: logo;
-    margin: auto;
+    width: 100%;
+    text-align: center;
 }
-
 #logo img {
     height: 10vh;
+}
+@media screen and (min-width: 1024px) {
+    #logo {
+        text-align: left;
+    }
 }
 
 header {
@@ -33,12 +38,10 @@ header {
     display: flex;
     justify-content: space-between;
 }
-
 header>div:first-child {
     flex-grow: 1;
     height: 100%;
 }
-
 h1 {
     height: 100%;
     display: flex;
@@ -46,7 +49,6 @@ h1 {
     padding-left: 10px;
     margin: 0;
 }
-
 header img {
     box-sizing: border-box;
     max-height: 100%;
@@ -56,25 +58,34 @@ header img {
 #homeSection {
     grid-area: home;
     position: relative;
+    height: min-content;
 }
-
 #homeSection>div {
     position: absolute;
     top: 8%;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
     text-align: center;
+    text-wrap: nowrap;
+}
+@media screen and (min-width: 1024px) {
+    #homeSection>div {
+        top: 5%;
+    }
 }
 
 nav {
     grid-area: nav;
 }
-
 nav ul {
     list-style-type: none;
     padding: 0px;
-    margin: 5%;
+    margin: 0px;
 }
-
+nav li {
+    padding: 8% 5%;
+}
 nav>div {
     position: sticky;
     top: 5%;
@@ -85,7 +96,6 @@ main {
     display: flex;
     flex-wrap: wrap;
 }
-
 .item {
     box-sizing: border-box;
     max-width: 300px;
@@ -94,4 +104,5 @@ main {
 
 footer {
     grid-area: footer;
+    text-align: center;
 }
