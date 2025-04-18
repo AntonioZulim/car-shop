@@ -10,20 +10,21 @@
     <link rel="stylesheet" href="styles/theme.css">
 </head>
 <body>
-    <div id="logo"><img src="images/cart_icon_egg.jpg" alt="logo"></div>
+    <div id="logo"><a href="index.html"><img src="images/cart_icon_egg.jpg" alt="logo"></a></div>
 
     <header>
         <div><h1>Trenutna kategorija</h1></div>
-        <div class="button"><a href="cart.html"><img src="images/cart_icon.png" alt="cart link"></a></div>
+        <div class="button">
+            <a href="cart.html"><img src="images/cart_icon.png" alt="cart link"></a>
+            <div id="cartIconNum">0</div>
+        </div>
         <div class="button"><a href=""><img src="images/search_icon.png" alt="search link"></a></div>
     </header>
 
     <nav>
         <div>
-            <ul>
-                <li>Kategorija 1</li>
-                <li>Kategorija 2</li>
-                <li>Kategorija 3</li>
+            <ul id="categoriesContainer">
+                <!--Created by shop.js-->
             </ul>
             <hr/>
             <ul>
@@ -39,31 +40,27 @@
         <div>Carlet - Place for the best cars</div>
     </section>
 
-    <main> <!--temp items, should be dynamically added in js-->
-        <div class="item">
-            <img src="images/miniature/smart_fortwo.jpg">
-            <h3>Smart ForTwo</h3>
-        </div>
-        <div class="item">
-            <img src="images/miniature/smart_fortwo.jpg">
-            <h3>Smart ForTwo</h3>
-        </div>
-        <div class="item">
-            <img src="images/miniature/smart_fortwo.jpg">
-            <h3>Smart ForTwo</h3>
-        </div>
-        <div class="item">
-            <img src="images/miniature/smart_fortwo.jpg">
-            <h3>Smart ForTwo</h3>
-        </div>
-        <div class="item">
-            <img src="images/oldtimer/ford_mustang.jpg">
-            <h3>Ford Mustang</h3>
-        </div>
+    <main id="itemsContainer">
+        <!--Created by shop.js-->
     </main>
 
     <footer>
         <p>Made by Antonio Zulim</p>
     </footer>
+
+    <template>
+        <div class="item">
+            <div class="itemImage">
+                <div class="addCartIcon">
+                    <img src="images/cart_icon.png">
+                </div>
+            </div>
+            <h3>Smart ForTwo</h3>
+            <div class="cartNum">0</div>
+        </div>
+    </template>
+
+    <script src="scripts/data.js"></script>
+    <script src="scripts/shop.js"></script>
 </body>
 </html>

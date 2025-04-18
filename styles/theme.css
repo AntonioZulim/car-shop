@@ -90,6 +90,12 @@ nav li:hover {
     transform: scale(0.995);
 }
 
+.addItem, .removeItem {
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 footer {
     background-color: var(--primary-color);
 }
