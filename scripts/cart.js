@@ -2,7 +2,8 @@ const cartIconNum = document.getElementById("cartIconNum");
 const itemsTable = document.querySelector("tbody");
 const emptyCartMessage = document.getElementById("emptyCartMessage");
 const emptyAllBtn = document.getElementById("emptyAllBtn");
-const template = document.querySelector("template");
+const template = document.getElementById("itemTempl");
+const headerTmpl = document.getElementById("headerTempl");
 
 let itemsCartStatus = {}
 let cartStatus = 0;
@@ -19,11 +20,14 @@ function SetTable(){
         itemsTable.parentElement.style.display = "none";
         emptyAllBtn.style.display = "none";
         emptyCartMessage.style.display = "block";
+        cartIconNum.style.display = "none";
     }
 }
 
 function UpdateCartData(){
     itemsTable.replaceChildren();
+    const header = headerTmpl.content.cloneNode(true).firstElementChild;
+    itemsTable.appendChild(header);
     let inCart = Object.keys(itemsCartStatus).filter(el => itemsCartStatus[el]!=0);
     for(let item of inCart){
         let elem = template.content.cloneNode(true).firstElementChild;
@@ -71,6 +75,7 @@ function AddItem(item){
 
 const emptyAllFun = function EmptyAll(){
     localStorage.removeItem("cart");
+    cartStatus = 0;
     SetTable();
 }
 

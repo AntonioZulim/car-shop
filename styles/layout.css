@@ -1,22 +1,18 @@
 body {
     margin: 0;
+    height: 100vh;
     display: grid;
     grid-template-areas: "logo logo" "header header" "home home" "nav main" "footer footer";
     grid-template-columns: 1fr 3fr;
-    grid-template-rows: 10vh 10vh auto auto auto;
+    grid-template-rows: 10vh 10vh auto auto 8vh;
 }
 
 @media screen and (min-width: 1024px){
     body {
-        display: grid;
         grid-template-areas: "logo header" "nav home" "nav main" "nav main" "footer footer";
         grid-template-columns: 1fr 5fr;
-        grid-template-rows: 10vh auto auto auto auto;
+        grid-template-rows: 10vh auto auto auto 8vh;
     }
-}
-
-img {
-    max-width: 100%;
 }
 
 #logo {
@@ -41,11 +37,11 @@ header {
 header>div:first-child {
     flex-grow: 1;
     height: 100%;
-}
-h1 {
-    height: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+h1 {
     padding-left: 10px;
     margin: 0;
 }
@@ -105,10 +101,10 @@ nav li {
 }
 nav>div {
     position: sticky;
-    top: 5%;
+    top: 3%;
 }
 
-main {
+#itemsContainer {
     grid-area: main;
     display: flex;
     flex-wrap: wrap;

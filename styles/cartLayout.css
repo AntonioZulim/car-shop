@@ -2,8 +2,8 @@ body {
     margin: 0;
     height: 100vh;
     display: grid;
-    grid-template-areas: "logo" "header" "home" "main" "footer";
-    grid-template-rows: 10vh 10vh auto auto 8vh;
+    grid-template-areas: "logo" "header" "main" "footer";
+    grid-template-rows: 10vh 10vh auto 8vh;
 }
 
 @media screen and (min-width: 1024px){
@@ -117,6 +117,12 @@ td {
 #emptyCartMessage {
     display: none;
     text-align: center;
+}
+
+#emptyAllBtn {
+    margin: auto;
+    display: block;
+    padding: 10px;
 }
 
 footer {

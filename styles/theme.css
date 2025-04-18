@@ -18,6 +18,9 @@ body {
 header, #logo{
     background-color: var(--primary-color);
 }
+.button {
+    user-select: none;
+}
 .button:hover {
     background-color: var(--hover-color);
 }
@@ -54,6 +57,7 @@ nav li:hover {
 .item {
     background-color: var(--secondary-color);
     border-radius: 5px;
+    user-select: none;
 }
 .item:hover {
     transition-duration: 0.2s;
@@ -93,6 +97,20 @@ nav li:hover {
 .addItem, .removeItem {
     background-color: var(--secondary-color);
     border-radius: 50%;
+}
+.addItem:hover, .removeItem:hover {
+    background-color: var(--hover-color);
+    color: white;
+    cursor: pointer;
+}
+
+button {
+    background-color: var(--secondary-color);
+    border: none;
+}
+button:hover {
+    background-color: var(--hover-color);
+    color: white;
     cursor: pointer;
 }
 

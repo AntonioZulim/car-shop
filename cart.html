@@ -13,7 +13,7 @@
     <div id="logo"><a href="index.html"><img src="images/cart_icon_egg.jpg" alt="logo"></a></div>
 
     <header>
-        <div><h1>Košarica</h1></div>
+        <div></div>
         <div class="button">
             <a href="cart.html"><img src="images/cart_icon.png" alt="cart link"></a>
             <div id="cartIconNum">0</div>
@@ -21,26 +21,18 @@
         <div class="button"><a href=""><img src="images/search_icon.png" alt="search link"></a></div>
     </header>
 
-    <!-- <section id="homeSection">
-        <img src="images/homepage.jpg">
-        <div>Carlet - Place for the best cars</div>
-    </section> -->
-
     <main>
-        <h2>Košarica</h2>
+        <h2>Cart</h2>
         <table>
             <tbody>
-                <tr>
-                    <th>NAZIV PROIZVODA</th>
-                    <th>KOLIČINA</th>
-                </tr>
+                <!--Dynamicly created by cart.js-->
             </tbody>
         </table>
-        <button id="emptyAllBtn">Isprazni cijelu košaricu</button>
-        <p id="emptyCartMessage">Košarica je prazna</p>
+        <button id="emptyAllBtn">Empty whole cart</button>
+        <p id="emptyCartMessage">Cart is empty</p>
     </main>
 
-    <template>
+    <template id="itemTempl">
         <tr>
             <td>Proizvod 1</td>
             <td>
@@ -48,6 +40,13 @@
                 <div class="quantity">0</div>
                 <div class="addItem">+</div>
             </td>
+        </tr>
+    </template>
+    
+    <template id="headerTempl">
+        <tr id="tableHead">
+            <th>PRODUCT NAME</th>
+            <th>QUANTITY</th>
         </tr>
     </template>
     
