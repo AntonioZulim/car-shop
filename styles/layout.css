@@ -99,7 +99,8 @@ nav ul {
 nav li {
     padding: 8% 5%;
 }
-nav>div {
+
+.sticky {
     position: sticky;
     top: 3%;
 }

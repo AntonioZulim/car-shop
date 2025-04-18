@@ -47,11 +47,15 @@ nav{
 nav ul {
     text-wrap-style: wrap;
     text-align: center;
+    font-weight: bold;
 }
 nav li:hover {
     background-color: var(--hover-color);
     color: white;
     cursor: pointer;
+}
+hr {
+    border-top: 2px solid var(--primary-color);
 }
 
 .item {

@@ -10,7 +10,15 @@ let cartStatus = 0;
 
 window.addEventListener("DOMContentLoaded", () => GenerateNav());
 window.addEventListener("DOMContentLoaded", () => LoadCartStatus());
+window.addEventListener("DOMContentLoaded", () => Sticky());
 categoriesContainer.addEventListener("click", e => ChangeCategory(e.target.innerText));
+
+function Sticky(){
+    const navDiv = document.querySelector("nav").firstElementChild;
+    if(navDiv.clientHeight < 0.90*window.innerHeight){
+        navDiv.classList.add("sticky");
+    }
+}
 
 function AddClickedToCart(itemObject, category){
     let itemName = itemObject.querySelector("h3").innerText;

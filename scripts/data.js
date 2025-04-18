@@ -42,7 +42,7 @@ const data = {
         { "name": "Ford Focus", "image": "../images/medium/ford_focus.jpg" },
         { "name": "Kia Ceed", "image": "../images/medium/kia_ceed.jpg" },
         { "name": "Peugeot 308", "image": "../images/medium/peugeot_308.jpg" },
-        { "name": "Skoda Octavia", "image": "../images/medium/skoda_octavia.jpg" },
+        { "name": "Škoda Octavia", "image": "../images/medium/skoda_octavia.jpg" },
         { "name": "Toyota Corolla", "image": "../images/medium/toyota_corolla.jpg" },
         { "name": "VW Golf", "image": "../images/medium/vw_golf.jpg" }
       ]
