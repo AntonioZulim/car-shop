@@ -1,0 +1,13 @@
+const express = require("express");
+const router = express.Router();
+
+router.use(express.static("public"));
+
+router.get("/", (req, res)=>{
+    res.redirect("/home/getCategories");
+});
+router.get("/getCategories", (req, res)=>{
+    res.render("index");
+});
+
+module.exports = router;

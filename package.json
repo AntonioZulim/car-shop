@@ -1,0 +1,24 @@
+{
+  "name": "car-shop",
+  "version": "1.0.0",
+  "description": "Web site for my web class.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonioZulim/car-shop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AntonioZulim/car-shop/issues"
+  },
+  "homepage": "https://github.com/AntonioZulim/car-shop#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  }
+}
