@@ -63,6 +63,7 @@ header img {
     align-content: center;
     padding: 2px;
     pointer-events: none;
+    display: none;
 }
 
 #homeSection {

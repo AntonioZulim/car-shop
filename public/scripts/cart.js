@@ -8,11 +8,11 @@ const headerTmpl = document.getElementById("headerTempl");
 let itemsCartStatus = {}
 let cartStatus = 0;
 
-function SetTable(){
+async function SetTable(){
     try{
-        itemsCartStatus = JSON.parse(localStorage.getItem("cart"));
+        itemsCartStatus = (await (await fetch("/cart/getAll")).json());
         if(itemsCartStatus===null){
-            throw new Error("Invalid data.js");
+            throw new Error("Couldn't fetch cart");
         }
         UpdateCartData();
     }
@@ -28,53 +28,54 @@ function UpdateCartData(){
     itemsTable.replaceChildren();
     const header = headerTmpl.content.cloneNode(true).firstElementChild;
     itemsTable.appendChild(header);
-    let inCart = Object.keys(itemsCartStatus).filter(el => itemsCartStatus[el]!=0);
-    for(let item of inCart){
+    for(let item of Object.values(itemsCartStatus)){
         let elem = template.content.cloneNode(true).firstElementChild;
         let name = elem.querySelectorAll("td")[0];
         let quantity = elem.querySelector(".quantity");
         let removeBtn = elem.querySelector(".removeItem");
         let addBtn = elem.querySelector(".addItem");
-
-        name.innerText = item;
-        quantity.innerText = itemsCartStatus[item];
-
+        
+        name.innerText = item[0];
+        quantity.innerText = item[1];
+        
         removeBtn.addEventListener("click", e => RemoveItem(e.target.parentElement.parentElement));
         addBtn.addEventListener("click", e => AddItem(e.target.parentElement.parentElement));
         itemsTable.appendChild(elem);
     }
-    cartStatus = Object.values(itemsCartStatus).reduce((acc, val) => acc+val);
-    if(cartStatus==0){
+
+    cartStatus = 0;
+    for (let el of Object.values(itemsCartStatus)) {
+        cartStatus += el[1];
+    }
+    cartIconNum.innerText = cartStatus;
+
+    if (cartStatus===0) {
         itemsTable.parentElement.style.display = "none";
         emptyAllBtn.style.display = "none";
         emptyCartMessage.style.display = "block";
         cartIconNum.style.display = "none";
     }
-    cartIconNum.innerText = cartStatus;
+    else{
+        cartIconNum.style.display = "block";
+    }
 }
 
-function RemoveItem(item){
+async function RemoveItem(item){
     const name = item.firstElementChild.innerText
-    if(itemsCartStatus[name]>0){
-        itemsCartStatus[name]--;
-    }
-    item.querySelector(".quantity").innerText = itemsCartStatus[name];
-    localStorage.setItem("cart", JSON.stringify(itemsCartStatus));
+    let itemId = Object.keys(itemsCartStatus).find(el => itemsCartStatus[el][0]===name);
+    itemsCartStatus = (await (await fetch(`/cart/remove/${itemId}`)).json());
     UpdateCartData();
 }
 
-function AddItem(item){
+async function AddItem(item){
     const name = item.firstElementChild.innerText
-    if(itemsCartStatus[name]<Number.MAX_SAFE_INTEGER){
-        itemsCartStatus[name]++;
-    }
-    item.querySelector(".quantity").innerText =itemsCartStatus[name];
-    localStorage.setItem("cart", JSON.stringify(itemsCartStatus));
+    let itemId = Object.keys(itemsCartStatus).find(el => itemsCartStatus[el][0]===name);
+    itemsCartStatus = (await (await fetch(`/cart/add/${itemId}`)).json());
     UpdateCartData();
 }
 
-const emptyAllFun = function EmptyAll(){
-    localStorage.removeItem("cart");
+const emptyAllFun = async function EmptyAll(){
+    await fetch("/cart/removeAll");
     cartStatus = 0;
     SetTable();
 }

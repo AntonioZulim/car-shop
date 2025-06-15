@@ -6,20 +6,13 @@
     <title>Car shop</title>
     <meta name="author" content="Antonio Zulim">
     <meta name="description" content="Car web shop">
-    <link rel="stylesheet" href="styles/cartLayout.css">
-    <link rel="stylesheet" href="styles/theme.css">
+    <link rel="stylesheet" href="/styles/cartLayout.css">
+    <link rel="stylesheet" href="/styles/theme.css">
 </head>
 <body>
-    <div id="logo"><a href="/"><img src="images/logo.png" alt="logo"></a></div>
+    <div id="logo"><a href="/"><img src="/images/logo.png" alt="logo"></a></div>
 
-    <header>
-        <div></div>
-        <div class="button">
-            <a href="/cart"><img src="images/cart_icon.png" alt="cart link"></a>
-            <div id="cartIconNum">0</div>
-        </div>
-        <div class="button"><a href=""><img src="images/search_icon.png" alt="search link"></a></div>
-    </header>
+    <%- include("./partials/header") %>
 
     <main>
         <h2>Cart</h2>
@@ -50,10 +43,8 @@
         </tr>
     </template>
     
-    <footer>
-        <p>Made by Antonio Zulim</p>
-    </footer>
+    <%- include("./partials/footer") %>
 
-    <script src="scripts/cart.js"></script>
+    <script src="/scripts/cart.js"></script>
 </body>
 </html>

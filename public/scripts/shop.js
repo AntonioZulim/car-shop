@@ -6,6 +6,7 @@ const itemsContainer = document.getElementById("itemsContainer");
 const template = document.querySelector("template");
 
 let itemsCartStatus = {};
+let categoryData = {};
 let cartStatus = 0;
 
 window.addEventListener("DOMContentLoaded", () => GenerateNav());
@@ -20,67 +21,75 @@ function Sticky(){
     }
 }
 
-function AddClickedToCart(itemObject, category){
-    let itemName = itemObject.querySelector("h3").innerText;
-    if(itemsCartStatus[itemName]<Number.MAX_SAFE_INTEGER){
-        itemsCartStatus[itemName]++;
-        cartStatus++;
-    }
-    
-    let cartNum = itemObject.querySelector(".cartNum");
-    cartNum.innerText = itemsCartStatus[itemName];
-    cartIconNum.innerText = cartStatus;
-    if(itemsCartStatus[itemName]>0){
-        cartNum.style.display = "block";
-    }
-    if(cartStatus>0){
-        cartIconNum.style.display = "block";
-    }
-    localStorage.setItem("cart", JSON.stringify(itemsCartStatus));
-}
-
-function LoadCartStatus(){
+async function AddClickedToCart(itemObject, category){
     try{
-        itemsCartStatus = JSON.parse(localStorage.getItem("cart"));
-        if(itemsCartStatus===null){
-            cartStatus = 0;
-            itemsCartStatus = {};
-            for(let cat of data.categories){
-                for(item of cat.products){
-                    itemsCartStatus[item.name] = 0;
-                }
-            }
-        }
-        for(let quantity of Object.values(itemsCartStatus)){
-            cartStatus+=quantity;
+        let itemName = itemObject.querySelector("h3").innerText;
+        let itemId = categoryData.products.find(el => el.name===itemName).id;
+        itemsCartStatus = (await (await fetch(`/cart/add/${itemId}`)).json());
+        
+        let cartNum = itemObject.querySelector(".cartNum");
+        cartNum.innerText = itemsCartStatus[itemId][1];
+
+        cartStatus = 0;
+        for(let el of Object.values(itemsCartStatus)){
+            cartStatus+=el[1];
         }
         cartIconNum.innerText = cartStatus;
-        if(cartStatus==0){
-            cartIconNum.style.display = "none";
+        
+        if(itemsCartStatus[itemId][1]>0){
+            cartNum.style.display = "block";
+        }
+        if(cartStatus>0){
+            cartIconNum.style.display = "block";
         }
     }
     catch{
-        console.error("Can't load cart status.");
+        console.error("Couldn't add to cart");
     }
 }
 
-function GenerateNav(){
-    const cats = data.categories.map(el => el.name);
-    for(let cat of cats){
-        let elem = document.createElement("li");
-        elem.innerText = cat;
-        categoriesContainer.appendChild(elem);
+async function LoadCartStatus(){
+    try{
+        itemsCartStatus = (await (await fetch("/cart/getAll")).json());
+        if(itemsCartStatus===null){
+            throw(new Error("Couldn't fetch cart"));
+        }
+        cartStatus = 0;
+        for(let el of Object.values(itemsCartStatus)){
+            cartStatus+=el[1];
+        }
+        cartIconNum.innerText = cartStatus;
+        if(cartStatus!==0){
+            cartIconNum.style.display = "block";
+        }
+    }
+    catch{
+        console.error("Couldn't load cart data.");
     }
 }
 
-function ChangeCategory(clickedCategory){
-    const category = data.categories.find(el => el.name==clickedCategory);
+async function GenerateNav(){
+    try{
+        const cats = (await (await fetch("/home/getCategories")).json()).categories;
+        for(let cat of cats){
+            let elem = document.createElement("li");
+            elem.innerText = cat;
+            categoriesContainer.appendChild(elem);
+        }
+    }
+    catch{
+        console.error("Couldn't load server data");
+    }
+}
 
-    homeSection.firstElementChild.src = category.image;
-    header.firstElementChild.firstElementChild.innerHTML = category.name;
+async function ChangeCategory(clickedCategory){
+    categoryData = (await (await fetch(`/home/getProducts/${clickedCategory.toLowerCase()}`)).json()).category;
+
+    homeSection.firstElementChild.src = categoryData.image;
+    header.firstElementChild.firstElementChild.innerHTML = categoryData.name;
 
     itemsContainer.replaceChildren();
-    for(let item of category.products) {
+    for(let item of categoryData.products) {
         let elem = template.content.cloneNode(true).firstElementChild;
         let img = elem.querySelector(".itemImage");
         let name = elem.querySelector("h3");
@@ -88,8 +97,11 @@ function ChangeCategory(clickedCategory){
         
         img.style.backgroundImage = `url(${item.image})`;
         name.innerText = item.name;
-        cartNum.innerText = itemsCartStatus[name.innerText];
-        if(itemsCartStatus[name.innerText]==0){
+        if(itemsCartStatus[item.id]){
+            cartNum.innerText = itemsCartStatus[item.id][1];
+        }
+        else{
+            cartNum.innerText = 0;
             cartNum.style.display = "none";
         }
 
