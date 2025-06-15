@@ -13,7 +13,7 @@ router.get("/getAll", (req, res)=>{
 });
 
 router.get("/add/:id", (req, res)=>{
-    const data = require("../data/data.js");
+    const data = require("../data/mydata.js");
     const ids = [];
     const names = [];
     data.categories.forEach(cat => cat.products.forEach(el => {
@@ -40,7 +40,7 @@ router.get("/add/:id", (req, res)=>{
 });
 
 router.get("/remove/:id", (req, res)=>{
-    const data = require("../data/data.js");
+    const data = require("../data/mydata.js");
     const ids = [];
     data.categories.forEach(cat => cat.products.forEach(el => ids.push(el.id)));
     if(ids.includes(req.params.id)){
