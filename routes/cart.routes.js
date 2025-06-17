@@ -12,7 +12,7 @@ router.get("/getAll", (req, res)=>{
     res.json(req.session.cart);
 });
 
-router.get("/add/:id", (req, res)=>{
+router.put("/add/:id", (req, res)=>{
     const data = require("../data/mydata.js");
     const ids = [];
     const names = [];
@@ -39,7 +39,7 @@ router.get("/add/:id", (req, res)=>{
     }
 });
 
-router.get("/remove/:id", (req, res)=>{
+router.delete("/remove/:id", (req, res)=>{
     const data = require("../data/mydata.js");
     const ids = [];
     data.categories.forEach(cat => cat.products.forEach(el => ids.push(el.id)));
@@ -60,7 +60,7 @@ router.get("/remove/:id", (req, res)=>{
     }
 });
 
-router.get("/removeAll", (req, res) => {
+router.delete("/removeAll", (req, res) => {
     req.session.cart = {};
     res.json(req.session.cart);
 })

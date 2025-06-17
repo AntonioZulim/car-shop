@@ -25,7 +25,7 @@ async function AddClickedToCart(itemObject, category){
     try{
         let itemName = itemObject.querySelector("h3").innerText;
         let itemId = categoryData.products.find(el => el.name===itemName).id;
-        itemsCartStatus = (await (await fetch(`/cart/add/${itemId}`)).json());
+        itemsCartStatus = (await (await fetch(`/cart/add/${itemId}`, {method: "PUT"})).json());
         
         let cartNum = itemObject.querySelector(".cartNum");
         cartNum.innerText = itemsCartStatus[itemId][1];

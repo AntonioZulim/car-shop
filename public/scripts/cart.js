@@ -63,19 +63,19 @@ function UpdateCartData(){
 async function RemoveItem(item){
     const name = item.firstElementChild.innerText
     let itemId = Object.keys(itemsCartStatus).find(el => itemsCartStatus[el][0]===name);
-    itemsCartStatus = (await (await fetch(`/cart/remove/${itemId}`)).json());
+    itemsCartStatus = (await (await fetch(`/cart/remove/${itemId}`, {method: "DELETE"})).json());
     UpdateCartData();
 }
 
 async function AddItem(item){
     const name = item.firstElementChild.innerText
     let itemId = Object.keys(itemsCartStatus).find(el => itemsCartStatus[el][0]===name);
-    itemsCartStatus = (await (await fetch(`/cart/add/${itemId}`)).json());
+    itemsCartStatus = (await (await fetch(`/cart/add/${itemId}`, {method: "PUT"})).json());
     UpdateCartData();
 }
 
 const emptyAllFun = async function EmptyAll(){
-    await fetch("/cart/removeAll");
+    await fetch("/cart/removeAll", {method: "DELETE"});
     cartStatus = 0;
     SetTable();
 }
